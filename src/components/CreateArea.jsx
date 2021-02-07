@@ -7,27 +7,23 @@ function CreateArea(props) {
     content: ''
   });
 
-function handleChange(event) {
-  const {name, value} = event.target;
+  function handleChange(event) {
+    const {name, value} = event.target;
 
-    setNote(prevValue => {
-      if (name === 'title') {
-        return ({
-          title: value,
-          content: prevValue.content
-        });
-      } else if (name === 'content') {
-        return ({
-          title: prevValue.title,
-          content: value
-        })
-      }
-    })
-    
+    setNote(prevNote => {
+      return {
+        ...prevNote,
+        [name]: value
+      };
+    });
   }
 
   function submitNote(event) {
     props.onAdd(note);
+    setNote({
+      title: "",
+      content: ""
+    });
     event.preventDefault();
   }
 
